@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo: Make a choropleth map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<link
+href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+rel="stylesheet"
+/>
+<style>
+body {
+margin: 0;
+padding: 0;
+}
+h2,
+h3 {
+margin: 10px;
+font-size: 18px;
+color: aliceblue;
+text-align: center;
+}
+h3 {
+font-size: 16px;
+}
+p {
+margin: 10px;
+color: aliceblue;
+text-align: center;
+}
+.map-overlay {
+position: absolute;
+bottom: 0;
+right: 0;
+background: rgb(56, 56, 56);
+margin-right: 20px;
+font-family: Arial, sans-serif;
+overflow: auto;
+border-radius: 3px;
+}
+#map {
+position: absolute;
+top: 0;
+bottom: 0;
+width: 100%;
+}
+#features {
+top: 0;
+height: 450px;
+margin-top: 20px;
+width: 300px;
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="map-overlay" id="features">
+<h2>Spotify World Chart TOP50</h2>
+<div id="pd"><p>Hover over a Country!</p></div>
+</div>
+<div class="map-overlay" id="legend"></div>
+ 
+<script>
+// define access token
+mapboxgl.accessToken = 'pk.eyJ1IjoiZjFrdW5pIiwiYSI6ImNrdzJ4ZWhtNDBwaXAzMW1veXN5cGYwM2EifQ.-NTeimXFcbrFi2g5ZHDgjA';
+ 
+// create map
+const map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/f1kuni/ckzvvzoub00bd14qt4y1fd1b6' // map style URL from Mapbox Studio
+});
+ 
+// wait for map to load before adjusting it
+map.on('load', () => {
+// make a pointer cursor
+map.getCanvas().style.cursor = 'default';
+ 
+// set map bounds to the continental US
+map.fitBounds([
+[-133.2421875, 16.972741],
+[-47.63671875, 52.696361]
+]);
+ 
+
+ 
+
+// change info window on hover
+map.on('click', (event) => {
+const states = map.queryRenderedFeatures(event.point, {
+layers: ['spotify-boundaries']
+});
+document.getElementById('pd').innerHTML = states.length
+? `<p><strong><em>${states[0].properties.spotify}</strong> </em></p>`
+: `<p>Hover over a Country!</p>`;
+});
+});
+</script>
+</body>
+</html>
