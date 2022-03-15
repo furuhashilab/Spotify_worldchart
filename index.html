@@ -88,7 +88,7 @@ map.fitBounds([
 // change info window on hover
 map.on('click', (event) => {
 const states = map.queryRenderedFeatures(event.point, {
-layers: ['spotify-boundaries']
+layers: ['spotify-countries']
 });
 document.getElementById('pd').innerHTML = states.length
 ? `<p><strong><em>${states[0].properties.spotify}</strong> </em></p>`
