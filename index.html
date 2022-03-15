@@ -62,30 +62,24 @@ width: 300px;
 <div class="map-overlay" id="legend"></div>
  
 <script>
-// define access token
 mapboxgl.accessToken = 'pk.eyJ1IjoiZjFrdW5pIiwiYSI6ImNrdzJ4ZWhtNDBwaXAzMW1veXN5cGYwM2EifQ.-NTeimXFcbrFi2g5ZHDgjA';
  
-// create map
 const map = new mapboxgl.Map({
 container: 'map', // container id
 style: 'mapbox://styles/f1kuni/ckzvvzoub00bd14qt4y1fd1b6' // map style URL from Mapbox Studio
 });
  
-// wait for map to load before adjusting it
 map.on('load', () => {
 // make a pointer cursor
 map.getCanvas().style.cursor = 'default';
  
-// set map bounds to the continental US
+
 map.fitBounds([
 [-133.2421875, 16.972741],
 [-47.63671875, 52.696361]
 ]);
  
 
- 
-
-// change info window on hover
 map.on('click', (event) => {
 const states = map.queryRenderedFeatures(event.point, {
 layers: ['spotify-countries']
