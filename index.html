@@ -89,9 +89,11 @@ map.on('load', () => {
 // make a pointer cursor
 map.getCanvas().style.cursor = 'default';
  
-
+map.fitBounds([
+[-133.2421875, 16.972741],
+[-47.63671875, 52.696361]
+]);
  
-
 map.on('click', (event) => {
 const states = map.queryRenderedFeatures(event.point, {
 layers: ['spotify-countries']
