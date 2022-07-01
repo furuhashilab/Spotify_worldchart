@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Demo: Spotify World Chart Map</title>
+<title>Demo: Make a choropleth map</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-<link
-href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
 rel="stylesheet"
 />
 <style>
@@ -73,20 +72,23 @@ width: 300px;
 <div id="map"></div>
 <div class="map-overlay" id="features">
 <h2>Spotify World Chart TOP50</h2>
-<div id="pd"><p>Click a Country!</p></div>
+<div id="pd"><p>Hover over a Country!</p></div>
 </div>
 <div class="map-overlay" id="legend"></div>
  
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiZjFrdW5pIiwiYSI6ImNrdzJ4ZWhtNDBwaXAzMW1veXN5cGYwM2EifQ.-NTeimXFcbrFi2g5ZHDgjA';
- 
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZjFrdW5pIiwiYSI6ImNrdzJ4ZWhtNDBwaXAzMW1veXN5cGYwM2EifQ.-NTeimXFcbrFi2g5ZHDgjA';
 const map = new mapboxgl.Map({
-container: 'map', // container id
-style: 'mapbox://styles/f1kuni/ckzvvzoub00bd14qt4y1fd1b6' // map style URL from Mapbox Studio
+container: 'map',
+style: 'mapbox://styles/f1kuni/ckzvvzoub00bd14qt4y1fd1b6',
+zoom: 1.5,
+center: [30, 50],
+projection: 'globe'
 });
  
 map.on('load', () => {
-// make a pointer cursor
+// Set the default atmosphere style
+map.setFog({});
 map.getCanvas().style.cursor = 'default';
  
 map.fitBounds([
@@ -103,6 +105,7 @@ document.getElementById('pd').innerHTML = states.length
 : `<p>Click a Country!</p>`;
 });
 });
+
 </script>
 </body>
 </html>
